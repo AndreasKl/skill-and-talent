@@ -28,9 +28,17 @@ class MainVerticle : AbstractVerticle() {
   private fun createHttpServer(): HttpServer {
     val httpServer = vertx.createHttpServer()
     val router = Router.router(vertx)
-    router.get("/").handler(OverviewController()::indexHandler)
-    router.get("/selfservice").handler(skillandtalent.selfservice.OverviewController()::indexHandler)
-    router.get("/teamservice").handler(skillandtalent.teamservice.OverviewController()::indexHandler)
+
+//    router.get("/").handler { event ->
+//      event.response().putHeader("Location", "/townhall")
+//      event.response().statusCode = 302
+//      event.response().end()
+//    }
+    router.mountSubRouter("/", skillandtalent.townhall.Routing().register(vertx))
+    router.mountSubRouter("/townhall", skillandtalent.townhall.Routing().register(vertx))
+    router.mountSubRouter("/selfservice", skillandtalent.selfservice.Routing().register(vertx))
+    router.mountSubRouter("/teamservice", skillandtalent.teamservice.Routing().register(vertx))
+
     router.post().handler(BodyHandler.create())
 
     router.route().handler(FaviconHandler.create())
