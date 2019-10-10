@@ -1,0 +1,7 @@
+
+sudo: true
+
+language: java
+
+jdk:
+  - openjdk13

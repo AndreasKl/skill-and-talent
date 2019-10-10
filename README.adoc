@@ -1,0 +1,24 @@
+= Skill-and-talent
+
+Skill and talent is a working title for a project to help employees to develop their skills when
+employed in a `self-organizing` company...
+
+
+== Building
+
+To launch tests:
+```
+./mvnw clean test
+```
+
+To package the application:
+```
+./mvnw clean package
+```
+
+To run the application:
+```
+./mvnw clean compile exec:java
+```
+
+
